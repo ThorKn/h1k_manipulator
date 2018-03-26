@@ -172,6 +172,7 @@ class Console:
         print ("--------------------------------------------------------------------------")
         print ("One Lut Menu") 
         print ("--------------------------------------------------------------------------")
+        self.chip.printLutTable(9,1,0)
 
     # menuState == 5, input
     def askOneLut(self):
