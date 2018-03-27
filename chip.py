@@ -125,6 +125,9 @@ class Chip:
 
         return lut_in_order 
 
+    # Takes a 16-char long string (bits) and write it into the lut
+    # in tile_x, tile_y, lut_nr
+    # The bits-string must be in ordern of the lut-table [0..15]
     def setLutTableBits(self, tile_x, tile_y, lut_nr, bits):
         lut = list(self.getLutBits(tile_x, tile_y, lut_nr))
         print (lut)
