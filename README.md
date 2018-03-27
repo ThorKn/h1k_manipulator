@@ -40,6 +40,11 @@ Clone the repository to a local directory.
 Install the additional python package "click".  
 Run ``` python3 main.py ```
 
+You should get the Mainmenu:
+![](pics/menu.gif)
+
+
+
 ## 5. Example
 
 
