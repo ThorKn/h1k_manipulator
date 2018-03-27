@@ -47,8 +47,8 @@ The workflow is intended as:
 
 * Load .asc File
 * Show all Tiles
-  * The LUTs with "not empty" Data are shown with a "1"
-  * Note the x- and y-values of the LUTs you want to manipulate
+  * The Tiles with "not empty" LUT-Data are shown with a "1"
+  * Note the x- and y-values of the Tiles you want to manipulate
 * Show one Tile (with the noted x- and y-values of the Tile)
   * All 8 LUTs in the choosen Tile are displayed
   * Note the LUT number you want to manipulate
@@ -58,6 +58,11 @@ The workflow is intended as:
 * Write the manipulated Data into an .asc File
 
 ## 5. Example
+
+The eaxample is the most simple one. It uses a Lattice IceStick with 2 external push buttons and one of the LEDs on the IceStick. Here are pictures of the hardwaresetup and the wiring:
+![](pics/icestick.gif)
+![](pics/wiring.gif)
+
 
 
 
