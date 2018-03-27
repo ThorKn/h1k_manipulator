@@ -21,10 +21,17 @@ class Chip:
         buf_2 = io.StringIO(buf)
         data = [line[:-1] for line in buf_2]
 
-#        self.comment = data[0]
-        self.device = data[0]
-        i = 1
+        i = 0
         line = data[i]
+
+        if (line[0:8] == '.comment'):
+            self.comment = data[i]
+            i += 1
+            line = data[i]
+        if (line[0:7] == '.device'):
+            self.device = data[i]
+            i += 1
+            line = data[i]        
         
         # parse the lines in data and fill the tiles-array    
         while True:            
@@ -79,9 +86,10 @@ class Chip:
     def writeFile(self, filename):
 
         with open(filename, "w") as f:
-            
-            f.write(str(self.comment) + "\n")
-            f.write(str(self.device) + "\n")
+            if (self.comment != ''):
+                f.write(str(self.comment) + "\n")
+            if (self.device != ''):
+                f.write(str(self.device) + "\n")
             for rows in self.tiles:
                 for tile in rows:
                     if (tile.getType() != 'NO'):
@@ -102,21 +110,42 @@ class Chip:
                     for line in bits:
                         print(str(line))
 
-    def getLutBitsAll(self, tile_x, tile_y, lut_nr):
+    def getLutBits(self, tile_x, tile_y, lut_nr):
         if (self.tiles[tile_y][tile_x].getType() != '.logic_tile'):
             return -1
         tile_bits = self.tiles[tile_y][tile_x].getBits()
-        lut = (tile_bits[lut_nr * 2])[36:46] + (tile_bits[(lut_nr * 2) + 1])[36:46]
-        return lut
+        lut_bits = (tile_bits[lut_nr * 2])[36:46] + (tile_bits[(lut_nr * 2) + 1])[36:46]
+        return lut_bits
     
-    def printLutTable(self, tile_x, tile_y, lut_nr):
-        lut = self.getLutBitsAll(tile_x, tile_y, lut_nr)
+    def getLutTable(self, tile_x, tile_y, lut_nr):
+        lut = self.getLutBits(tile_x, tile_y, lut_nr)
         lut_in_order = []
         for i in range(16):
-#            lut_in_order.append(lut[self.lut_bit_order[i]])
- 
-#        print (lut_in_order)
-            print ("%04s" % ((bin(i))[2:]) + " " + lut[self.lut_bit_order[i]])
+            lut_in_order.append(lut[self.lut_bit_order[i]])
+
+        return lut_in_order 
+
+    def setLutTableBits(self, tile_x, tile_y, lut_nr, bits):
+        lut = list(self.getLutBits(tile_x, tile_y, lut_nr))
+        print (lut)
+        for i in range(16):
+            lut[self.lut_bit_order[i]] = bits[i]
+        print (lut)    
+        
+        tile_bits = self.tiles[tile_y][tile_x].getBits()
+        row_upper = list(tile_bits[lut_nr * 2])
+        for i in range(10):
+            row_upper[i + 36] = lut[i]
+
+        row_lower = list(tile_bits[(lut_nr * 2) + 1])
+        for i in range(10):
+            row_lower[i + 36] = lut[i + 10]
+
+        row_upper = ''.join(row_upper)
+        row_lower = ''.join(row_lower)
+        
+        self.tiles[tile_y][tile_x].setBitsRow((lut_nr * 2), row_upper)
+        self.tiles[tile_y][tile_x].setBitsRow(((lut_nr * 2) + 1), row_lower)             
         
 
     
