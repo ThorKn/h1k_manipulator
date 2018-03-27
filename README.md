@@ -68,6 +68,7 @@ The example is the most simple one. It uses a Lattice IceStick with 2 external p
 ![](pics/wiring.gif)
 
 The programming is based on these two codesnippets:
+
 Verilog (andGate.v):
 ```
 module top (input a, b, output y);
@@ -81,7 +82,7 @@ set_io b 61
 set_io y 99
 ```
 
-In the verilog file, a simple adder from the inputwires "a" and "b" to the outputwire "y" is build.
+In the verilog file, a simple AND-Gate from the inputwires "a" and "b" to the outputwire "y" is build.
 The constraint file connects the 3 wires to the io-pins.
 
 Build the andGate.asc file with yosys and arachne.pnr:
