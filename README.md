@@ -101,7 +101,12 @@ The last step is to convert "andGate_new.asc" into a bitstream (andGate_new.bin)
 icepack andGate_new.asc andGate_new.bin
 iceprog andGate_new.bin
 ```
- 
+
+## 6. Behind the scenes
+
+The big picture behind this project is to manipulate FPGA-routing for Physicaly Uncloneable Functions (PUFs). The two python classes "tile.py" and "chip.py" can hold a whole ".asc" file and are meant as a base for experimenting with the routing. The next step on the to-do list is to manipulate the routing from the simple "andGate" example. The routing between the LOGIC-Tile (containing the one used LUT) and the IO-Tiles shall be changed.
+
+The class "chip.py" could be extended to a "Manipulation-API" including the API-Functions from the Icebox-Tools (inside project icestorm). 
 
 
 
