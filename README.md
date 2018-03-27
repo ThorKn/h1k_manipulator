@@ -59,13 +59,44 @@ The workflow is intended as:
 
 ## 5. Example
 
-The eaxample is the most simple one. It uses a Lattice IceStick with 2 external push buttons and one of the LEDs on the IceStick. Here are pictures of the hardwaresetup and the wiring:
+The example is the most simple one. It uses a Lattice IceStick with 2 external push buttons and one of the LEDs on the IceStick. Here are pictures of the hardwaresetup and the wiring:
 ![](pics/icestick.jpg)
 ![](pics/wiring.gif)
 
+The programming is based on these two codesnippets:
+Verilog (adder.v):
+```
+module top (input a, b, output y);
+  assign y = a & b;
+endmodule
+```
+Constraint File (adder.pcf):
+```
+set_io a 62
+set_io b 61
+set_io y 99
+```
 
+In the verilog file a simple adder from the inputwires a and b to the outputwire y is build.
+The constraint file connects the 3 wires to the io-pins.
 
+Build the adder.asc file with yosys and arachne.pnr:
 
+```
+yosys -p 'synth_ice40 -top top -blif adder.blif' adder.v
+arachne-pnr -d 1k -o adder.asc -p adder.pcf adder.blif
+```
+
+The resulting adder.asc can be loaded into the hx1k-manipulator. There should be only one LUT in one Tile occupied for the adding-function. In the adder.asc given with this repository it is Tile x=9, y=1 and LUT-Nr=0.
+
+By manipulating the Data in the LUT and writing it back to another file (adder_new.asc) the logic function between the wires a and b can be changed.
+
+After manipulating the .asc file, the next steps are converting into a bitstream (.bin) and flashing onto the IceStick:
+```
+icepack adder_new.asc adder_new.bin
+iceprog adder_new.bin
+```
+ 
 
 
 
