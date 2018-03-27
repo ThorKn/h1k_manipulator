@@ -15,6 +15,8 @@ h1xk-manipulator is work-in-progress and far from beeing stable. Be aware that y
 * Display the status of all LUTs in one chooseable Tile
 * Display and modify one chooseable LUT in one chooseable Tile
 
+Known bugs:
+* No check if the file to load exists. (Running into an exception)
 
 ## 3. Prerequisites
 * Tested on Ubuntu 16.04.
