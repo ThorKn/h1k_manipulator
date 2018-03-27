@@ -60,7 +60,7 @@ The workflow is intended as:
 ## 5. Example
 
 The eaxample is the most simple one. It uses a Lattice IceStick with 2 external push buttons and one of the LEDs on the IceStick. Here are pictures of the hardwaresetup and the wiring:
-![](pics/icestick.gif)
+![](pics/icestick.jpg)
 ![](pics/wiring.gif)
 
 
