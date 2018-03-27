@@ -43,10 +43,21 @@ Run ``` python3 main.py ```
 You should get the Mainmenu:
 ![](pics/menu.gif)
 
+The workflow is intended as:
 
+* Load .asc File
+* Show all Tiles
+  * The LUTs with "not empty" Data are shown with a "1"
+  * Note the x- and y-values of the LUTs you want to manipulate
+* Show one Tile (with the noted x- and y-values of the Tile)
+  * All 8 LUTs in the choosen Tile are displayed
+  * Note the LUT number you want to manipulate
+* Show and modify one LUT
+  * use the keys "w, s, t" to manipulate the choosen LUT
+  * Discard the changes with "e" (escape) or store the changes with "c" (confirm)
+* Write the manipulated Data into an .asc File
 
 ## 5. Example
-
 
 
 
