@@ -85,7 +85,7 @@ set_io y 99
 In the verilog file, a simple AND-Gate from the inputwires "a" and "b" to the outputwire "y" is build.
 The constraint file connects the 3 wires to the io-pins.
 
-Build the andGate.asc file with yosys and arachne.pnr:
+Build the "andGate.asc" file with yosys and arachne-pnr:
 
 ```
 yosys -p 'synth_ice40 -top top -blif andGate.blif' andGate.v
