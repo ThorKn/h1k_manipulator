@@ -33,6 +33,7 @@ h1xk-manipulator is work-in-progress and far from beeing stable. Be aware that y
   * yosys
   * arachne-pnr
   * icestorm
+  * [Link to project icestorm](http://www.clifford.at/icestorm)
  
 ## 4. Usage
 
@@ -64,37 +65,37 @@ The example is the most simple one. It uses a Lattice IceStick with 2 external p
 ![](pics/wiring.gif)
 
 The programming is based on these two codesnippets:
-Verilog (adder.v):
+Verilog (andGate.v):
 ```
 module top (input a, b, output y);
   assign y = a & b;
 endmodule
 ```
-Constraint File (adder.pcf):
+Constraint File (andGate.pcf):
 ```
 set_io a 62
 set_io b 61
 set_io y 99
 ```
 
-In the verilog file a simple adder from the inputwires a and b to the outputwire y is build.
+In the verilog file, a simple adder from the inputwires "a" and "b" to the outputwire "y" is build.
 The constraint file connects the 3 wires to the io-pins.
 
-Build the adder.asc file with yosys and arachne.pnr:
+Build the andGate.asc file with yosys and arachne.pnr:
 
 ```
-yosys -p 'synth_ice40 -top top -blif adder.blif' adder.v
-arachne-pnr -d 1k -o adder.asc -p adder.pcf adder.blif
+yosys -p 'synth_ice40 -top top -blif andGate.blif' andGate.v
+arachne-pnr -d 1k -o andGate.asc -p andGate.pcf andGate.blif
 ```
 
-The resulting adder.asc can be loaded into the hx1k-manipulator. There should be only one LUT in one Tile occupied for the adding-function. In the adder.asc given with this repository it is Tile x=9, y=1 and LUT-Nr=0.
+The resulting "andGate.asc" can be loaded into the hx1k-manipulator. There should be only one LUT in one Tile occupied for the adding-function. In the "andGate.asc" given with this repository it is Tile x=9, y=1 and LUT-Nr=0.
 
-By manipulating the Data in the LUT and writing it back to another file (adder_new.asc) the logic function between the wires a and b can be changed.
+By manipulating the Data in the LUT and writing it back to another file (andGate_new.asc) the logic function between the wires "a" and "b" can be changed. One could change the AND to XOR, OR, NAND for example. The different results are seeable when playing with the push buttons after flashing the manipulated files to the IceStick.
 
-After manipulating the .asc file, the next steps are converting into a bitstream (.bin) and flashing onto the IceStick:
+The last step is to convert "andGate_new.asc" into a bitstream (andGate_new.bin) and flashing it onto the IceStick:
 ```
-icepack adder_new.asc adder_new.bin
-iceprog adder_new.bin
+icepack andGate_new.asc andGate_new.bin
+iceprog andGate_new.bin
 ```
  
 
