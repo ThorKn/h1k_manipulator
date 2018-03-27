@@ -38,7 +38,7 @@ h1xk-manipulator is work-in-progress and far from beeing stable. Be aware that y
 
 Clone the repository to a local directory.  
 Install the additional python package "click".  
-Run ''' python3 main.py '''
+Run ``` python3 main.py ```
 
 ## 5. Example
 
